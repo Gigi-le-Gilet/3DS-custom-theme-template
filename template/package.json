@@ -1,0 +1,6 @@
+{
+  "name": "{{repoName}}",
+  "version": "0.0.1",
+  "description": "{{repoDesc}}",
+  "repository": "git@github.com:{{username}}/{{repoName}}.git"
+}
