@@ -11,14 +11,36 @@ module.exports = function(dest, data, cb){
   } catch(err) {
     if (err) return cb(err)
   }
-  
-  async.map([
-    'package.json',
-    'README.md'
-  ], function(file, cb){
-    file = path.resolve(dest, file)
-    replace(file, data, cb)
-  }, cb)
+
+  async.waterfall([
+    renameFiles,
+    fillFiles
+  ], cb)
+
+
+  function fillFiles(cb){
+    async.each([
+      'package.json',
+      'README.md'
+    ], function(file, cb){
+      file = path.resolve(dest, file)
+      replace(file, data, cb)
+    }, cb)
+  }
+
+  function renameFiles(cb){
+    async.each([
+      '0.gitignore',
+      '0.npmignore'
+    ], function(file, cb){
+      file = path.resolve(dest, file)
+      file_ = path.join(
+        path.dirname(file),
+        path.basename(file).slice(1)
+      )
+      fs.rename(file, file_, cb)
+    }, cb)
+  }
 }
 
 
