@@ -1,6 +1,6 @@
 {
   "name": "repo-template",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A template for project repository",
   "repository": "git@github.com:fritx/repo-template.git",
   "keywords": [
